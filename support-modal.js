@@ -1,27 +1,27 @@
-/* support-modal.js
-
 (function () {
   'use strict';
   try {
-
     var CONFIG = {
-      buttonLabel: 'Get Your Access Code', 
-      menuLabel: 'Access Code',             
-      menuTag: 'Get yours',                
+
+      /* Buttons that open this modal */
+      buttonLabel: 'Get Your Access Code',   
+      menuLabel: 'Access Code',              
+      menuTag: 'Get yours',                  
       popupAfterMinutes: 2,
 
       title: 'Support and Unlock',
-      tabs: ['Your Benefits', 'Your Impact', 'Support options'],
+      tabs: ['Benefits', 'Impact', 'Support'],
       nextLabel: 'Continue',
+
       benefits: {
         hero: { icon: 'edit', title: 'Private Notepad', text: 'Write prayers and revelations, lock them with a PIN, and share them anytime.', badge: 'Powerful' },
         items: [
-          { icon: 'book', title: 'Powerful Prayers with over 120 prayer points' },
+          { icon: 'book', title: 'Over 120 Powerful Prayer Points' },
           { icon: 'todo', title: 'Prayer to-do list' },
           { icon: 'offline', title: 'Pray offline anywhere' },
-          { icon: 'moon', title: 'Dark mode and text size' },
-          { icon: 'star', title: 'New features coming soon' },
-          { icon: 'heart', title: 'Priority across our apps' }
+          { icon: 'moon', title: 'Dark mode and text size toggle' },
+          { icon: 'star', title: 'Regular Updates and 24/7 Support' },
+          { icon: 'heart', title: 'Priority Access to Our Ecosystem' }
         ]
       },
 
