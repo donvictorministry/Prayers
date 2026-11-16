@@ -1,42 +1,22 @@
-/* support-modal.js - the "Access Code" support modal.
- *
- * STANDALONE: own CSS, HTML and JavaScript. If you delete this file, the buttons that open it
- * (unlock screen, left menu, right menu) simply disappear and everything else keeps working.
- *
- * It opens from: the big button on the unlock screen, "Access Code" in both side menus,
- * and by itself a few minutes after a visitor without an access code opens the app.
- *
- * NO PAYMENT HERE. "Check out" opens your four contact links (email, WhatsApp, Facebook, phone)
- * with a ready-made message that includes the amount the person chose. You receive the support
- * yourself and send the access code. The contact links come from book.js (META).
- */
+/* support-modal.js
+
 (function () {
   'use strict';
   try {
 
-    /* ============================================================
-       EDIT EVERYTHING HERE. Plain words and numbers only.
-       ============================================================ */
     var CONFIG = {
-
-      /* Buttons that open this modal */
-      buttonLabel: 'Get Your Access Code',   /* the big button on the unlock screen */
-      menuLabel: 'Access Code',              /* the item in the left and right menus */
-      menuTag: 'Get yours',                  /* the small gold tag on that menu item */
-
-      /* The modal pops up by itself this many minutes after the app opens (only for
-         people without an access code, once per visit). 0 = never. */
+      buttonLabel: 'Get Your Access Code', 
+      menuLabel: 'Access Code',             
+      menuTag: 'Get yours',                
       popupAfterMinutes: 2,
 
       title: 'Support and Unlock',
-      tabs: ['Benefits', 'Impact', 'Support'],
+      tabs: ['Your Benefits', 'Your Impact', 'Support options'],
       nextLabel: 'Continue',
-
-      /* STEP 1: what they get. Icon names are in icons.js. */
       benefits: {
         hero: { icon: 'edit', title: 'Private Notepad', text: 'Write prayers and revelations, lock them with a PIN, and share them anytime.', badge: 'Powerful' },
         items: [
-          { icon: 'book', title: 'Prayer chapters and points' },
+          { icon: 'book', title: 'Powerful Prayers with over 120 prayer points' },
           { icon: 'todo', title: 'Prayer to-do list' },
           { icon: 'offline', title: 'Pray offline anywhere' },
           { icon: 'moon', title: 'Dark mode and text size' },
