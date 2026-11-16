@@ -3,7 +3,6 @@
   try {
     var CONFIG = {
 
-      /* Buttons that open this modal */
       buttonLabel: 'Get Your Access Code',   
       menuLabel: 'Access Code',              
       menuTag: 'Get yours',                  
@@ -25,45 +24,38 @@
         ]
       },
 
-      /* STEP 2: what their support achieves */
       impact: {
-        heading: 'Your seed keeps this ministry alive',
-        text: 'Every gift helps us keep serving people like you, every single day.',
+        heading: 'Making a Difference Together!',
+        text: 'Your generosity helps us sustain this vision and impact more lives globally.',
         items: [
-          { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and lightening fast.' },
-          { icon: 'servers', title: 'Servers', text: 'Powers every unlock and update.' },
-          { icon: 'group', title: 'Staff salaries', text: 'Supports those who build, write and pray.' },
+          { icon: 'cloud', title: 'Hosting', text: 'Powers our apps and keeps them accessible worldwide.' },
+          { icon: 'servers', title: 'Servers', text: 'Covers essential infrastructure costs.' },
+          { icon: 'group', title: 'Staff salaries', text: 'supports those laboring daily to impact lives.' },
           { icon: 'office', title: 'Ministry office', text: 'Covers daily operating costs.' },
-          { icon: 'globe', title: 'More outreach', text: 'New prayer resources and apps for more hearts.' }
+          { icon: 'globe', title: 'More resources', text: 'Developing digital solutions and writing inspirational materials.' }
         ]
       },
-
-      /* STEP 3: the amounts. Add, remove or change any of them. */
+      
       support: {
-        heading: 'Choose your support',
+        heading: 'Choose your support options',
         usdLabel: 'US Dollars',
         usd: ['$5', '$10', '$20', '$50', '$100'],
         ngnLabel: 'Nigerian Naira',
-        ngn: ['\u20A65,000', '\u20A610,000', '\u20A630,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
+        ngn: ['\u20A65,000', '\u20A610,000', '\u20A620,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
-        note: 'One-time support. Your access code is included.'
+        note: '𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝘆𝗼𝘂𝗿 𝗴𝗲𝗻𝗲𝗿𝗼𝘂𝘀 𝗴𝗶𝗳𝘁 & 𝗼𝗻𝗴𝗼𝗶𝗻𝗴 𝘀𝘂𝗽𝗽𝗼𝗿𝘁. 𝗬𝗼𝘂𝗿 𝗮𝗰𝗰𝗲𝘀𝘀 𝗰𝗼𝗱𝗲 𝗶𝘀 𝗼𝘂𝗿 𝘁𝗼𝗸𝗲𝗻 𝗼𝗳 𝗮𝗽𝗽𝗿𝗲𝗰𝗶𝗮𝘁𝗶𝗼𝗻.'
       },
 
-      /* The Check out button and the contact box it opens */
       checkout: {
         button: 'Check out',
-        boxTitle: 'Reach out to complete',
+        boxTitle: 'Kindly reach out for payment details to complete your support.',
         boxText: 'Choose any link. We will send your access code once your support is received.',
         close: 'Close',
-        /* {amount} is replaced with what the person picked */
+        
         message: 'Hello, I would like to support with {amount} and get my access code for The Prayer App.'
       },
-
-      /* Only used if book.js has no contacts */
       contactFallback: { email: '', phone: '', whatsapp: '', facebook: '' }
     };
-    /* ================= END OF THE EDIT AREA ================= */
-
 
     var STYLE_ID = 'svm-style';
     var el = null, pushed = false, seen = false;
