@@ -1,7 +1,4 @@
-/* sw.js - lets The Prayer App open offline.
-   Change CACHE_NAME (for example to prayer-app-v2) every time you upload new files,
-   so phones pick up the update. */
-var CACHE_NAME = 'prayer-app-v5';
+var CACHE_NAME = 'prayer-app-v6';
 
 var FILES = [
   './',
