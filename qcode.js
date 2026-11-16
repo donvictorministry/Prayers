@@ -1,23 +1,21 @@
 (function () {
   'use strict';
   try {
-
-    
     var CONFIG = {
       url: '',                  
       logo: 'https://app.donvictorministry.org.ng/Prayers/logo.png',  
-      logoSize: 25,             
+      logoSize: 38,             
       host: '.lock-ic',         
-      size: 112,                
+      size: 128,                
+      dark: '#0A3F8F',          
       light: '#FFFFFF',         
       ring: '#E9B93C',          
       label: 'QR code for The Prayer App. Tap to enlarge.',
       closeLabel: 'Close',
       bigSize: 300              
     };
-    
-    var ECC = [13, 22, 18, 26, 18, 24, 18, 22, 20, 24];   /* error-correction codewords per block, level Q */
-    var BLK = [1, 1, 2, 2, 4, 4, 6, 6, 8, 8];             /* number of blocks, level Q */
+    var ECC = [17, 28, 22, 16, 22, 28, 26, 26, 24, 28];   /* error-correction codewords per block, level H */
+    var BLK = [1, 1, 2, 4, 4, 4, 5, 6, 8, 8];             /* number of blocks, level H */
 
     function rawModules(v) {
       var r = (16 * v + 128) * v + 64, n;
@@ -54,7 +52,7 @@
       });
       return r;
     }
-
+    
     function encode(text) {
       var data = bytesOf(text), v, bits = [], i, k;
       for (v = 1; v <= 10; v++) { if (4 + (v < 10 ? 8 : 16) + 8 * data.length <= dataCw(v) * 8) { break; } }
@@ -74,7 +72,6 @@
         cw.push(b);
       }
 
-      /* split into blocks, add error correction, interleave */
       var nb = BLK[v - 1], eccLen = ECC[v - 1], raw = Math.floor(rawModules(v) / 8);
       var nShort = nb - raw % nb, shortLen = Math.floor(raw / nb), div = rsDiv(eccLen), blocks = [], pos = 0, dat;
       for (i = 0; i < nb; i++) {
@@ -122,7 +119,7 @@
       });
 
       function format(mask) {
-        var d = (3 << 3) | mask, rem = d, j;       /* 3 = error correction level Q */
+        var d = (2 << 3) | mask, rem = d, j;       /* 2 = error correction level H */
         for (j = 0; j < 10; j++) { rem = (rem << 1) ^ ((rem >>> 9) * 0x537); }
         var fb = ((d << 10) | rem) ^ 0x5412;
         for (j = 0; j <= 5; j++) { set(8, j, bit(fb, j)); }
@@ -197,7 +194,7 @@
         if (p < bestP) { bestP = p; best = k; }
       }
       mask(best); format(best);
-      return { size: size, m: m };
+      return { size: size, m: m, version: v };
     }
 
     /* ------------------------------------------------------------
@@ -224,7 +221,9 @@
 
     /* The QR picture with your logo in the middle. If the logo cannot load, the logo circle is removed. */
     function picture(qr, sizeCss) {
-      var logo = CONFIG.logo ? '<span class="qcd-logo"><img src="' + CONFIG.logo.replace(/"/g, '&quot;') + '" alt="" onerror="this.parentNode.remove()"></span>' : '';
+      /* Long addresses (QR version 7 and up) need a smaller logo to stay readable, so they are capped at 30 percent. */
+      var pct = qr.version >= 7 ? Math.min(CONFIG.logoSize, 30) : CONFIG.logoSize;
+      var logo = CONFIG.logo ? '<span class="qcd-logo" style="width:' + pct + '%"><img src="' + CONFIG.logo.replace(/"/g, '&quot;') + '" alt="" onerror="this.parentNode.remove()"></span>' : '';
       return '<div class="qcd-wrap" style="width:' + sizeCss + ';height:' + sizeCss + '">' + svg(qr, 100) + logo + '</div>';
     }
 
@@ -254,27 +253,29 @@
       st.textContent = [
         /* the badge on the unlock screen */
         '.qcd-gone{display:none!important}',
-        '.qcd{position:relative;flex:none;display:block;width:clamp(72px,13dvh,' + CONFIG.size + 'px);aspect-ratio:1/1;margin:0 auto;padding:0;border:2px solid ' + CONFIG.ring + ';border-radius:16px;overflow:hidden;cursor:pointer;',
+        '.qcd{position:relative;flex:none;display:block;width:clamp(72px,16dvh,' + CONFIG.size + 'px);aspect-ratio:1/1;margin:0 auto;padding:0;border:2px solid ' + CONFIG.ring + ';border-radius:16px;overflow:hidden;cursor:pointer;',
         'background:' + CONFIG.light + ';box-shadow:0 6px 18px rgba(6,38,90,.3)}',
         '.qcd:active{transform:scale(.96)}',
         '.qcd-wrap{position:relative;line-height:0}',
         '.qcd svg,.qcd-wrap svg{display:block;width:100%;height:100%}',
-        '.qcd-logo{position:absolute;left:50%;top:50%;width:' + CONFIG.logoSize + '%;aspect-ratio:1/1;transform:translate(-50%,-50%);border-radius:50%;',
-        'background:' + CONFIG.light + ';box-shadow:0 0 0 1.5px rgba(10,63,143,.18),0 2px 6px rgba(6,38,90,.25);overflow:hidden}',
+        '.qcd-logo{position:absolute;left:50%;top:50%;aspect-ratio:1/1;transform:translate(-50%,-50%);border-radius:50%;padding:0;',
+        'background:' + CONFIG.light + ';box-shadow:0 0 0 2px ' + CONFIG.light + ',0 0 0 3px rgba(10,63,143,.22),0 2px 8px rgba(6,38,90,.3);overflow:hidden}',
         '.qcd-logo img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}',
         /* the enlarged view */
-        '.qcd-big{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;',
+        '.qcd-big{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;',
+        'padding:calc(env(safe-area-inset-top,0px) + 16px) 20px calc(env(safe-area-inset-bottom,0px) + 16px);',
         'background:rgba(6,38,90,.86);font:19px/1.4 Roboto,Inter,system-ui,sans-serif;animation:qcdfade .25s ease-out}',
-        '.qcd-card{position:relative;width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:12px;padding:22px 18px 20px;border-radius:28px;',
-        'border:3px solid ' + CONFIG.ring + ';background:' + CONFIG.light + ';color:#121212;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.45);max-height:calc(100dvh - 32px);overflow-y:auto}',
+        '.qcd-card{width:100%;max-width:380px;max-height:100%;display:flex;flex-direction:column;padding:20px 18px 16px;border-radius:28px;overflow:hidden;',
+        'border:3px solid ' + CONFIG.ring + ';background:' + CONFIG.light + ';color:#121212;box-shadow:0 12px 40px rgba(0,0,0,.45)}',
+        '.qcd-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}',
         '.qcd-card .qcd-wrap{flex:none}',
         '.qcd-author{margin:0;font-size:19px;font-weight:700;line-height:1.3;color:#121212}',
         '.qcd-url{margin:0;font-size:19px;font-weight:600;line-height:1.35;color:#0F5FCC;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}',
         '.qcd-cta{display:flex;justify-content:center;gap:16px;margin-top:4px}',
         '.qcd-cta a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,.28)}',
         '.qcd-cta .email{background:#8B0000}.qcd-cta .whatsapp{background:#25D366}.qcd-cta .facebook{background:#1877F2}.qcd-cta .phone{background:#1A8A44}',
-        '.qcd-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#5F6368;cursor:pointer;display:grid;place-items:center}',
-        '.qcd-x:active{background:rgba(24,119,242,.12)}',
+        '.qcd-close{flex:none;margin:14px 0 0;width:100%;height:52px;border-radius:26px;border:2px solid #1877F2;background:transparent;color:#1877F2;font:700 20px/1 Roboto,Inter,system-ui,sans-serif;cursor:pointer}',
+        '.qcd-close:active{background:rgba(24,119,242,.12)}',
         '@media (max-height:700px){.qcd{width:64px;border-radius:12px}}',
         '@keyframes qcdfade{from{opacity:0}to{opacity:1}}',
         '@media (prefers-reduced-motion:reduce){.qcd-big{animation:none}}'
@@ -294,19 +295,19 @@
       big.className = 'qcd-big';
       big.setAttribute('role', 'dialog');
       big.setAttribute('aria-modal', 'true');
-      big.innerHTML = '<div class="qcd-card">' +
-        '<button class="qcd-x" type="button" aria-label="' + esc(CONFIG.closeLabel) + '"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>' +
-        picture(qr, 'min(' + CONFIG.bigSize + 'px, calc(100dvw - 120px))') +
+      big.innerHTML = '<div class="qcd-card"><div class="qcd-scroll">' +
+        picture(qr, 'min(' + CONFIG.bigSize + 'px, calc(100dvw - 120px), 46dvh)') +
         '<p class="qcd-author">' + esc(C.author) + '</p>' +
         '<p class="qcd-url">' + esc(url).replace(/([\/.])/g, '$1<wbr>') + '</p>' +
         '<div class="qcd-cta">' +
         '<a class="email" href="mailto:' + esc(C.email) + '" aria-label="Email us">' + icon('mail', 28) + '</a>' +
         '<a class="whatsapp" href="https://wa.me/' + esc(String(C.whatsapp).replace(/[^0-9]/g, '')) + '" target="_blank" rel="noopener" aria-label="WhatsApp us">' + icon('whatsapp', 28) + '</a>' +
         '<a class="facebook" href="' + esc(C.facebook) + '" target="_blank" rel="noopener" aria-label="Facebook">' + icon('facebook', 28) + '</a>' +
-        '<a class="phone" href="tel:' + esc(C.phone) + '" aria-label="Call us">' + icon('phone', 28) + '</a></div></div>';
+        '<a class="phone" href="tel:' + esc(C.phone) + '" aria-label="Call us">' + icon('phone', 28) + '</a></div></div>' +
+        '<button class="qcd-close" type="button">' + esc(CONFIG.closeLabel) + '</button></div>';
       big.addEventListener('click', function () { big.remove(); });
       big.querySelector('.qcd-card').addEventListener('click', function (e) { e.stopPropagation(); });
-      big.querySelector('.qcd-x').addEventListener('click', function () { big.remove(); });
+      big.querySelector('.qcd-close').addEventListener('click', function () { big.remove(); });
       document.body.appendChild(big);
     }
 
