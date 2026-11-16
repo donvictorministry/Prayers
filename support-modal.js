@@ -14,14 +14,14 @@
       nextLabel: 'Continue',
 
       benefits: {
-        hero: { icon: 'edit', title: 'Private Notepad', text: 'Write prayers and revelations, lock them with a PIN, and share them anytime.', badge: 'Powerful' },
+        hero: { icon: 'edit', title: 'Special Private Notepad', text: 'Write prayers and revelations, lock them with a PIN, and share them anytime.', badge: 'Glory to God!' },
         items: [
           { icon: 'book', title: 'Over 120 Powerful Prayer Points' },
           { icon: 'todo', title: 'Prayer to-do list' },
           { icon: 'offline', title: 'Pray offline anywhere' },
           { icon: 'moon', title: 'Dark mode and text size toggle' },
-          { icon: 'star', title: 'Regular Updates and 24/7 Support' },
-          { icon: 'heart', title: 'Priority Access to Our Ecosystem' }
+          { icon: 'star', title: 'Regular updates & 24/7 support' },
+          { icon: 'heart', title: 'Priority access to our ecosystem' }
         ]
       },
 
@@ -30,7 +30,7 @@
         heading: 'Your seed keeps this ministry alive',
         text: 'Every gift helps us keep serving people like you, every single day.',
         items: [
-          { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and fast.' },
+          { icon: 'cloud', title: 'Hosting', text: 'Keeps this app online and lightening fast.' },
           { icon: 'servers', title: 'Servers', text: 'Powers every unlock and update.' },
           { icon: 'group', title: 'Staff salaries', text: 'Supports those who build, write and pray.' },
           { icon: 'office', title: 'Ministry office', text: 'Covers daily operating costs.' },
@@ -44,7 +44,7 @@
         usdLabel: 'US Dollars',
         usd: ['$5', '$10', '$20', '$50', '$100'],
         ngnLabel: 'Nigerian Naira',
-        ngn: ['\u20A65,000', '\u20A610,000', '\u20A615,000', '\u20A625,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
+        ngn: ['\u20A65,000', '\u20A610,000', '\u20A630,000', '\u20A650,000', '\u20A670,000', '\u20A6100,000'],
         defaultPick: '$10',
         note: 'One-time support. Your access code is included.'
       },
