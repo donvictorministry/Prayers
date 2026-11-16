@@ -1,45 +1,21 @@
-/* qcode.js - the QR code of The Prayer App, shown on the unlock screen in the place of the lock icon.
- *
- * STANDALONE: it carries its own QR encoder, CSS and JavaScript. No library, no internet.
- * The QR code opens your app address and nothing else.
- * Your logo sits in the middle of it (see CONFIG.logo below).
- * Tap the QR code to enlarge it. The enlarged view shows only: the QR code, the author name,
- * the app address, and the four contact buttons (email, WhatsApp, Facebook, phone).
- * The author and the four contacts come from book.js (META).
- *
- * How it connects: it watches for the lock icon on the unlock screen (the element named in
- * CONFIG.host), puts the QR badge in its place and hides the icon. app.js and cover-page.js
- * are not touched. If you delete this file (and its script tag in index.html), the unlock
- * screen simply shows the lock icon again. Nothing else is affected.
- */
 (function () {
   'use strict';
   try {
 
-    /* ============================================================
-       EDIT HERE. Words, colours and sizes only.
-       ============================================================ */
+    
     var CONFIG = {
-      url: '',                  /* the app address the QR opens. Leave empty to use the address this page is opened at */
-      logo: 'https://app.donvictorministry.org.ng/Prayers/logo.png',   /* your hosted logo, shown in the middle of the QR */
-      logoSize: 20,             /* logo width as a percent of the badge. Keep it 22 or less so the code still scans */
-      host: '.lock-ic',         /* the element the QR badge replaces (the lock icon on the unlock screen) */
-      size: 112,                /* biggest badge size in pixels (it gets smaller on short screens) */
-      dark: '#0A3F8F',          /* QR dots. Keep this dark so phones can read it */
-      light: '#FFFFFF',         /* QR background. Keep this white */
-      ring: '#E9B93C',          /* thin gold border around the badge */
+      url: '',                  
+      logo: 'https://app.donvictorministry.org.ng/Prayers/logo.png',  
+      logoSize: 20,             
+      host: '.lock-ic',         
+      size: 112,                
+      light: '#FFFFFF',         
+      ring: '#E9B93C',          
       label: 'QR code for The Prayer App. Tap to enlarge.',
       closeLabel: 'Close',
-      bigSize: 300              /* enlarged size in pixels (it never goes wider than the screen) */
+      bigSize: 300              
     };
-    /* ================= END OF THE EDIT AREA ================= */
-
-
-    /* ------------------------------------------------------------
-       QR ENCODER: byte mode, error correction level Q (about 25 percent can be covered,
-       which keeps the code readable with a logo in the middle), versions 1 to 10.
-       Fits web addresses up to about 150 characters.
-       ------------------------------------------------------------ */
+    
     var ECC = [13, 22, 18, 26, 18, 24, 18, 22, 20, 24];   /* error-correction codewords per block, level Q */
     var BLK = [1, 1, 2, 2, 4, 4, 6, 6, 8, 8];             /* number of blocks, level Q */
 
@@ -283,7 +259,7 @@
         '.qcd:active{transform:scale(.96)}',
         '.qcd-wrap{position:relative;line-height:0}',
         '.qcd svg,.qcd-wrap svg{display:block;width:100%;height:100%}',
-        '.qcd-logo{position:absolute;left:50%;top:50%;width:' + CONFIG.logoSize + '%;aspect-ratio:1/1;transform:translate(-50%,-50%);border-radius:50%;padding:5%;',
+        '.qcd-logo{position:absolute;left:50%;top:50%;width:' + CONFIG.logoSize + '%;aspect-ratio:1/1;transform:translate(-50%,-50%);border-radius:50%;',
         'background:' + CONFIG.light + ';box-shadow:0 0 0 1.5px rgba(10,63,143,.18),0 2px 6px rgba(6,38,90,.25);overflow:hidden}',
         '.qcd-logo img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}',
         /* the enlarged view */
@@ -297,7 +273,7 @@
         '.qcd-cta{display:flex;justify-content:center;gap:16px;margin-top:4px}',
         '.qcd-cta a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,.28)}',
         '.qcd-cta .email{background:#8B0000}.qcd-cta .whatsapp{background:#25D366}.qcd-cta .facebook{background:#1877F2}.qcd-cta .phone{background:#1A8A44}',
-        '.qcd-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#5F6368;cursor:pointer;display:grid;place-items:center}',
+        '.qcd-x{position:absolute;top:16px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#5F6368;cursor:pointer;display:grid;place-items:center}',
         '.qcd-x:active{background:rgba(24,119,242,.12)}',
         '@media (max-height:700px){.qcd{width:64px;border-radius:12px}}',
         '@keyframes qcdfade{from{opacity:0}to{opacity:1}}',
