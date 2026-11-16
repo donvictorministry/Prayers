@@ -5,7 +5,7 @@
   var CFG = {
     API_URL: 'https://script.google.com/macros/s/AKfycbyA8Dg4xg7VpB6ZvX9cJZF-pV3wnxift3z3Cyh_xjXbeRsiiRWsP_w4_imjAKmInbppJg/exec',
     PRODUCT: 'the-prayer-app',   
-    VERIFY_HOURS: 4,             
+    VERIFY_HOURS: 6,             
     TIMEOUT_MS: 25000
   };
 
