@@ -6,7 +6,7 @@
     var CONFIG = {
       url: '',                  
       logo: 'https://app.donvictorministry.org.ng/Prayers/logo.png',  
-      logoSize: 20,             
+      logoSize: 25,             
       host: '.lock-ic',         
       size: 112,                
       light: '#FFFFFF',         
@@ -273,7 +273,7 @@
         '.qcd-cta{display:flex;justify-content:center;gap:16px;margin-top:4px}',
         '.qcd-cta a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#FFFFFF;box-shadow:0 4px 12px rgba(0,0,0,.28)}',
         '.qcd-cta .email{background:#8B0000}.qcd-cta .whatsapp{background:#25D366}.qcd-cta .facebook{background:#1877F2}.qcd-cta .phone{background:#1A8A44}',
-        '.qcd-x{position:absolute;top:16px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#5F6368;cursor:pointer;display:grid;place-items:center}',
+        '.qcd-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#5F6368;cursor:pointer;display:grid;place-items:center}',
         '.qcd-x:active{background:rgba(24,119,242,.12)}',
         '@media (max-height:700px){.qcd{width:64px;border-radius:12px}}',
         '@keyframes qcdfade{from{opacity:0}to{opacity:1}}',
