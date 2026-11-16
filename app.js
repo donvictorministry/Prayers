@@ -1,4 +1,5 @@
-/* app.js - Phones and Tablets only.*/
+/* app.js */
+
 (function () {
   'use strict';
   if (document.documentElement.classList.contains('blocked')) { return; }
