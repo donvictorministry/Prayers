@@ -1,4 +1,4 @@
-var CACHE_NAME = 'prayer-app-v6';
+var CACHE_NAME = 'prayer-app-v7';
 
 var FILES = [
   './',
@@ -16,6 +16,7 @@ var FILES = [
   './dr-dvg.png',
   './prayer-app-og.png',
   './prayer-icon.png',
+  './logo.png',
   './manifest.json'
 ];
 
