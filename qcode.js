@@ -21,7 +21,7 @@
        ============================================================ */
     var CONFIG = {
       url: '',                  /* the app address the QR opens. Leave empty to use the address this page is opened at */
-      logo: 'https://REPLACE-WITH-YOUR-HOSTED-URL/logo.png',   /* your hosted logo, shown in the middle of the QR */
+      logo: 'https://app.donvictorministry.org.ng/Prayers/logo.png',   /* your hosted logo, shown in the middle of the QR */
       logoSize: 20,             /* logo width as a percent of the badge. Keep it 22 or less so the code still scans */
       host: '.lock-ic',         /* the element the QR badge replaces (the lock icon on the unlock screen) */
       size: 112,                /* biggest badge size in pixels (it gets smaller on short screens) */
